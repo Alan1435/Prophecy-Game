@@ -6,35 +6,52 @@ const Game = () => {
     const gameContainerRef = useRef<HTMLDivElement>(null);
     const gameInstanceRef = useRef<ProphecyGame | null>(null);
 
-// In Game.tsx's useEffect:
-useEffect(() => {
-    console.log("Game component mounted");
-    if (!gameContainerRef.current) {
-        console.log("No container ref");
-        return;
-    }
-    
-    try {
-        // Get container dimensions
-        const container = gameContainerRef.current;
-        const width = container.clientWidth;
-        const height = container.clientHeight;
-        console.log("Container dimensions:", width, height);
+    useEffect(() => {
+        if (!gameContainerRef.current) {
+            console.error('No game container ref');
+            return;
+        }
 
-        // Create game instance
-        const game = new ProphecyGame(width, height);
-        console.log("Game instance created");
-        gameInstanceRef.current = game;
+        try {
+            console.log('Starting game initialization...');
+            // Get container dimensions
+            const container = gameContainerRef.current;
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+            console.log('Container dimensions:', width, height);
 
-        // Add the PIXI canvas to container
-        container.appendChild(game.app.view as HTMLCanvasElement);
-        console.log("Canvas added to container");
+            // Create game instance
+            const game = new ProphecyGame(width, height);
+            gameInstanceRef.current = game;
+            console.log('Game instance created');
 
-        // ... rest of the code
-    } catch (error) {
-        console.error("Error initializing game:", error);
-    }
-}, []);
+            // Add the PIXI canvas to container
+            container.appendChild(game.app.view as HTMLCanvasElement);
+            console.log('Canvas added to container');
+
+            // Handle window resize
+            const handleResize = () => {
+                if (!container || !game) return;
+                const newWidth = container.clientWidth;
+                const newHeight = container.clientHeight;
+                game.resize(newWidth, newHeight);
+            };
+
+            window.addEventListener('resize', handleResize);
+
+            // Cleanup on unmount
+            return () => {
+                console.log('Cleaning up game');
+                window.removeEventListener('resize', handleResize);
+                if (game && game.app) {
+                    game.app.destroy(true, { children: true, texture: true, baseTexture: true });
+                }
+                gameInstanceRef.current = null;
+            };
+        } catch (error) {
+            console.error('Error initializing game:', error);
+        }
+    }, []);
 
     return (
         <div 
