@@ -301,67 +301,6 @@ export class ProphecyGame {
     
         this.flameAnimation.update();
         this.updateUI();
-    }onFlameClick() {
-        const now = Date.now();
-        
-        // Track click behavior and reset passive
-        this.playStyleSystem.onPlayerClick(now);
-        this.state.bonuses.passiveGain = 1;
-        this.lastClickTime = now;
-    
-        // Handle click power increase
-        if (this.state.bonuses.clickPower < this.MAX_CLICK_POWER) {
-            this.state.bonuses.clickPower = Math.min(
-                this.MAX_CLICK_POWER,
-                this.state.bonuses.clickPower + 0.5
-            );
-        }
-    
-        // Calculate and apply gains
-        const baseClickValue = this.getClickValue();
-        this.state.divineEnergy += baseClickValue;
-        this.updateProgress(baseClickValue); // Update progress based on energy gained
-    
-        this.flameAnimation.pulse();
-        this.updateUI();
-    }
-    
-    gameLoop(delta: number) {
-        const currentTime = Date.now();
-        const elapsedSeconds = (currentTime - this.lastTime) / 1000;
-        this.lastTime = currentTime;
-    
-        // Calculate time since last click FIRST
-        const timeSinceLastClick = (currentTime - this.lastClickTime) / 1000;
-    
-        // Handle click power decay
-        if (this.state.bonuses.clickPower > this.MIN_CLICK_POWER) {
-            const decayRate = this.BASE_DECAY_RATE * 
-                            Math.pow(this.DECAY_ACCELERATION, timeSinceLastClick / 5);
-            
-            this.state.bonuses.clickPower = Math.max(
-                this.MIN_CLICK_POWER,
-                this.state.bonuses.clickPower - (decayRate * elapsedSeconds)
-            );
-        }
-    
-        // Handle passive gain increase
-        if (timeSinceLastClick > 1) {
-            const newPassiveGain = Math.min(
-                this.MAX_PASSIVE_BONUS,
-                this.state.bonuses.passiveGain + (this.PASSIVE_GAIN_INCREASE_RATE * elapsedSeconds)
-            );
-            this.state.bonuses.passiveGain = newPassiveGain;
-            
-            // Calculate and apply passive gain
-            const basePassiveGain = this.getPassiveValue();
-            const totalPassiveGain = basePassiveGain * elapsedSeconds;
-            this.state.divineEnergy += totalPassiveGain;
-            this.updateProgress(totalPassiveGain); // Update progress based on passive gain
-        }
-    
-        this.flameAnimation.update();
-        this.updateUI();
     }
 
     private showMilestoneChoices() {
