@@ -1,3 +1,6 @@
+// src/game/interfaces/Upgrade.ts
+import type { GameState } from './GameState';
+
 export interface Upgrade {
     id: string;
     name: string;

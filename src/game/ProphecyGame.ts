@@ -125,7 +125,8 @@ export class ProphecyGame {
         flameGraphics.beginFill(0x4169E1);
         flameGraphics.drawRect(0, 0, 90, 90);
         flameGraphics.endFill();
-        this.flameSpriteSheet = this.app.renderer.generateTexture(flameGraphics);
+        const fallbackTexture = this.app.renderer.generateTexture(flameGraphics);
+        this.flameSpriteSheet = fallbackTexture;
 
         // Create fallback altar texture
         const altarGraphics = new PIXI.Graphics();
@@ -137,7 +138,7 @@ export class ProphecyGame {
 
     startGame() {
         // Create and position flame animation
-        this.flameAnimation = new FlameAnimation(this.flameSpriteSheet);
+        this.flameAnimation = new FlameAnimation(this.flameSpriteSheet.baseTexture);
         this.flameAnimation.setPosition(this.centerX, this.centerY - 80);
         this.flameAnimation.setScale(0.3);
 

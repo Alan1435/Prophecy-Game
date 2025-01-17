@@ -18,8 +18,8 @@ export class MilestoneSystem {
     completions: number = 0;
 
     private choiceButtons: PIXI.Container[] = [];
-    private background: PIXI.Graphics;
-    private titleText: PIXI.Text;
+    private background!: PIXI.Graphics;
+    private titleText!: PIXI.Text;
 
     constructor() {
         this.container = new PIXI.Container();

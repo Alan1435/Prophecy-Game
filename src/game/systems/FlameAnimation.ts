@@ -8,7 +8,7 @@ export class FlameAnimation {
     private clickFrame: PIXI.Texture | null = null;
     private isClickAnimating: boolean = false;
 
-    constructor(spriteSheet: PIXI.Texture) {
+    constructor(spriteSheet: PIXI.BaseTexture) {
         this.container = new PIXI.Container();
         
         // Create frames from sprite sheet (3x3 grid)
@@ -121,4 +121,5 @@ export class FlameAnimation {
             this.sprite.scale.set(originalScale);
         }, 100);
     }
+    
 }

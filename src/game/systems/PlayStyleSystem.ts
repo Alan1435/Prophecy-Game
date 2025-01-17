@@ -1,6 +1,13 @@
 // src/game/systems/PlayStyleSystem.ts
 import { GameState } from '../interfaces/GameState';
 
+interface StyleWeights {
+    patient: number;
+    active: number;
+    strategic: number;
+    [key: string]: number;  // Add index signature
+}
+
 interface PlayStyleMetrics {
     // Click patterns
     averageClickInterval: number;   // Average time between clicks
@@ -104,7 +111,7 @@ export class PlayStyleSystem {
     }
 
     private calculateStyleWeights(): { [key: string]: number } {
-        const weights = {
+        const weights: StyleWeights = {
             patient: 0,
             active: 0,
             strategic: 0

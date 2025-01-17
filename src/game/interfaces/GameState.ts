@@ -1,4 +1,6 @@
 // src/game/interfaces/GameState.ts
+import { Upgrade } from './Upgrade';
+
 export interface GameState {
     divineEnergy: number;
     followers: number;
@@ -17,8 +19,8 @@ export interface GameState {
         comboGain: number;
         blessingEffectiveness: number;
         upgradeCostReduction: number;
-        lastClickTime?: number;
         consecutiveClicks: number;
+        lastClickTime: number;
     };
     completedPaths: {
         patience: number;
