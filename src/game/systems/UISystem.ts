@@ -36,10 +36,10 @@ export class UISystem {
         this.uiText.divineEnergy.text = `Divine Energy: ${Math.floor(state.divineEnergy)}`;
         this.uiText.prophecyProgress.text = `Prophecy Progress: ${Math.floor(progressPercentage)}%`;
         this.uiText.blessings.text = 'Active Blessings:\n' +
-            `Meditation: x${state.blessings.meditation.toFixed(2)}\n` +
-            `Prayer: x${state.blessings.prayer.toFixed(2)}\n` +
-            `Rituals: x${state.blessings.rituals.toFixed(2)}\n` +
-            `Wisdom: x${state.blessings.wisdom.toFixed(2)}`;
+            `Meditation: x${state.blessings.meditation}\n` +
+            `Prayer: x${state.blessings.prayer}\n` +
+            `Rituals: x${state.blessings.rituals}\n` +
+            `Wisdom: x${state.blessings.wisdom}`;
     }
 
     positionElements(width: number, height: number) {
