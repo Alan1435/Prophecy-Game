@@ -166,9 +166,10 @@ export class ProphecyGame {
 
         // Setup tooltip callbacks
         this.bonusDisplaySystem.setTooltipCallbacks(
-            (title, desc, x, y, id) => this.tooltipSystem.showTooltip(title, desc, x, y, id, this.state),
+            (title: string, desc: string, x: number, y: number, id: string) => 
+                this.tooltipSystem.showTooltip(title, desc, x, y, id, this.state),
             () => this.tooltipSystem.hideTooltip(),
-            (x, y) => this.tooltipSystem.updatePosition(x, y)
+            (x: number, y: number) => this.tooltipSystem.updatePosition(x, y)
         );
 
         // Add interactions to flame
@@ -332,7 +333,8 @@ export class ProphecyGame {
         this.upgradeSystem.updateButtons(
             this.state,
             (upgrade) => this.purchaseUpgrade(upgrade),
-            (title, desc, x, y, id) => this.tooltipSystem.showTooltip(title, desc, x, y, id, this.state),
+            (title: string, desc: string, x: number, y: number, id: string) => 
+                this.tooltipSystem.showTooltip(title, desc, x, y, id, this.state),
             () => this.tooltipSystem.hideTooltip()
         );
     }
