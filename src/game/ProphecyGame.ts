@@ -17,10 +17,10 @@ export class ProphecyGame {
     textures: { [key: string]: PIXI.Texture };
     flameSpriteSheet!: PIXI.Texture;
     flameAnimation!: FlameAnimation;
-    altar: PIXI.Sprite;
-    centerX: number;
-    centerY: number;
-    lastTime: number;
+    altar!: PIXI.Sprite;
+    centerX!: number;
+    centerY!: number;
+    lastTime!: number;
 
     // Systems
     uiSystem: UISystem;
