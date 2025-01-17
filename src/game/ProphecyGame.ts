@@ -16,7 +16,7 @@ export class ProphecyGame {
     state: GameState;
     textures: { [key: string]: PIXI.Texture };
     flameSpriteSheet!: PIXI.Texture;
-    flameAnimation: FlameAnimation;
+    flameAnimation!: FlameAnimation;
     altar: PIXI.Sprite;
     centerX: number;
     centerY: number;
